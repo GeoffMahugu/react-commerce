@@ -7,6 +7,7 @@ const GITHUB_API = 'https://api.github.com/users/';
 const GitHubUser = () => {
     const [username, setUserName] = useState('');
     const [userdata, setUserData] = useState('');
+    const [loading, setLoading] = useState(false);
     const fetchGitUser = useRef(debounce((searchValue) => { console.log('FETCHING', searchValue); fetchGitUserApi(searchValue); }, 2000)).current;
 
     useEffect(() => {
@@ -16,14 +17,20 @@ const GitHubUser = () => {
 
     const handleInput = (event) => {
         const { value: searchValue } = event.target;
+        setLoading(true);
         setUserName(searchValue);
     };
 
     const fetchGitUserApi = async (name) => {
-        if (!name) return;
+        if (!name) {
+            setLoading(false);
+            setUserData(null);
+            return;
+        };
         try {
             const response = await axios.get(`${GITHUB_API}${name}`);
             const data = await response.data;
+            setLoading(false);
             setUserData(data);
         } catch (e) {
             console.log('ERROR::', e);
@@ -34,12 +41,13 @@ const GitHubUser = () => {
         <>
             <h4>Fetch User profile</h4>
             <div>
-                <label htmlFor="search-git-user">Search GitHub User </label>
+                <label htmlFor="search-git-user"><b>Search GitHub User</b> </label>
                 <input type="text" id="search-git-user" value={username} onChange={handleInput} />
             </div>
             <div>
-                {userdata ? <div><img src={userdata.avatar_url} alt={userdata.login} height="200" /><pre>{JSON.stringify(userdata, null, 4)}</pre></div> : <p>No user data to display</p>}
-]            </div>
+                {loading ? <div>Fetching...</div> : <div>{userdata && <div><img src={userdata.avatar_url} alt={userdata.login} height="200" /><pre>{JSON.stringify(userdata, null, 4)}</pre></div>}</div>}
+
+            </div>
         </>
     )
 }
