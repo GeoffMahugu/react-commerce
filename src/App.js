@@ -1,10 +1,12 @@
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 import './App.css';
+import Home from './components/home';
 import CountButton from './components/count_btn';
 import SearchBar from './components/search_bar';
 import Footer from './components/footer';
 import GitHubUser from './components/github_user';
+import Page404 from './components/404';
 function App() {
   return (
     <Router >
@@ -15,6 +17,12 @@ function App() {
         <div className="container">
           <div className="nav-wrapper">
             <ul style={{ listStyle: 'none' }}>
+              {/* <li>
+                <Link to={`/`}>Home</Link>
+              </li> */}
+              <li>
+                <Link to={`/`}>Home</Link>
+              </li>
               <li>
                 <Link to={`/counter`}>Counter</Link>
               </li>
@@ -28,6 +36,9 @@ function App() {
           </div>
           <div className="main-container">
             <Switch>
+              <Route path="" >
+                <Home />
+              </Route>
               <Route path="/counter" >
                 <CountButton />
               </Route>
@@ -36,6 +47,9 @@ function App() {
               </Route>
               <Route path="/users" >
                 <GitHubUser />
+              </Route>
+              <Route path="*" >
+                <Page404 />
               </Route>
             </Switch>
             <Footer />
