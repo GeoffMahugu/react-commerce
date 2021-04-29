@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import CountButton from './components/count_btn';
 import SearchBar from './components/search_bar';

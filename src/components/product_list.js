@@ -1,25 +1,34 @@
 import React, { useState, useEffect } from 'react';
 
 const ProductList = () => {
-    const [products, setProductState] = useState([]);
+    const [products, setProducts] = useState([]);
+    const [productState, setProductState] = useState(false);
     useEffect(() => {
-        setTimeout(() => {
-            setProductState([
-                { name: "Product 1", id: 1 },
-                { name: "Product2", id: 2 },
-                { name: "Product 3", id: 3 },
-            ]);
-            // console.log('DONE', products)
-        }, 100);
+        // setTimeout(() => {
+        //     setProducts([
+        //         { name: "Product 1", id: 1 },
+        //         { name: "Product2", id: 2 },
+        //         { name: "Product 3", id: 3 },
+        //     ]);
+        //     // console.log('DONE', products)
+        //     setProductState(products.lenght > 1);
+        // }, 100);
+        setProducts([
+            { name: "Product 1", id: 1 },
+            { name: "Product2", id: 2 },
+            { name: "Product 3", id: 3 },
+        ]);
+        console.log(products);
+        setProductState(true);
+        // console.log('DONE', products)
     }, []);
 
-
-    const productsState = products.lenght > 1;
     return (
-        <div>
+        < div >
             <h4>List of Products</h4>
-            {productsState ? <ul>{products.map((product) => { return <li key={product.id}>{product.name}</li> })}</ul> : <div>Loading....</div>}
-        </div>
+            {/* { products.lenght ? <ul>{products.map((product) => { return <li key={product.id}>{product.name}</li> })}</ul> : <div>Loading....</div>} */}
+            { productState ? <ul>{products.map((product) => { return <li key={product.id}>{product.name}</li> })}</ul> : <div>Loading....</div>}
+        </div >
     )
 }
 
