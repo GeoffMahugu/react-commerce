@@ -7,27 +7,24 @@ const GITHUB_API = 'https://api.github.com/users/';
 const GitHubUser = () => {
     const [username, setUserName] = useState('');
     const [userdata, setUserData] = useState('');
-    const fetchGitUser = useRef(debounce(() => { console.log('FETCHING', username); fetchApi(username); }, 2000)).current;
+    const fetchGitUser = useRef(debounce((searchValue) => { console.log('FETCHING', searchValue); fetchGitUserApi(searchValue); }, 2000)).current;
 
     useEffect(() => {
-        fetchGitUser();
+        fetchGitUser(username);
     }, [username]);
 
 
     const handleInput = (event) => {
-        setUserName(event.target.value);
+        const { value: searchValue } = event.target;
+        setUserName(searchValue);
     };
 
-    const fetchApi = async () => {
-        // console.log('::::::::::::::::::::::');
-        // console.log('SearchSTR', searchStr);
-        // console.log('USERNAME', username);
-        if (!username) return;
+    const fetchGitUserApi = async (name) => {
+        if (!name) return;
         try {
-            const response = await axios.get(`${GITHUB_API}${username}`);
+            const response = await axios.get(`${GITHUB_API}${name}`);
             const data = await response.data;
             setUserData(data);
-            console.log('RESPONSE::', data);
         } catch (e) {
             console.log('ERROR::', e);
         }
@@ -40,10 +37,9 @@ const GitHubUser = () => {
                 <label htmlFor="search-git-user">Search GitHub User </label>
                 <input type="text" id="search-git-user" value={username} onChange={handleInput} />
             </div>
-            <div>{username}</div>
             <div>
-                {userdata ? <div><pre>{userdata}</pre></div> : <p>No user data to display</p>}
-            </div>
+                {userdata ? <div><img src={userdata.avatar_url} alt={userdata.login} height="200" /><pre>{JSON.stringify(userdata, null, 4)}</pre></div> : <p>No user data to display</p>}
+]            </div>
         </>
     )
 }
