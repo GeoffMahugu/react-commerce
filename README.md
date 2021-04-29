@@ -6,6 +6,9 @@ This is a demo react application using basic features to make a web application.
 ### Features
 
 i) React routing
+
 ii) React Hooks
+
 iii) API fetch with axios 
+
 iv) State management
