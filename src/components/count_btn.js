@@ -16,7 +16,7 @@ const CountButton = () => {
         <div>
             <h4>Count Component</h4>
             <button onClick={incrementCounter}>+Count</button>
-            <div>{counter}</div>
+            <div className="count-counter">{counter}</div>
         </div>
     )
 }
