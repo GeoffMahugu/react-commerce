@@ -6,11 +6,15 @@ const CountButton = () => {
         setCounter(counter + 1);
     };
     useEffect(() => {
-        if (counter === 10) alert('⭐⭐⭐⭐⭐JACKPOT!!⭐⭐⭐⭐⭐');
+        if (counter === 10) {
+            alert('⭐⭐⭐⭐⭐JACKPOT!!⭐⭐⭐⭐⭐');
+            setCounter(0);
+        };
     }, [counter]);
 
     return (
         <div>
+            <h4>Count Component</h4>
             <button onClick={incrementCounter}>+Count</button>
             <div>{counter}</div>
         </div>

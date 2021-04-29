@@ -8,16 +8,18 @@ const GitHubUser = () => {
     const [username, setUserName] = useState('');
     const [userdata, setUserData] = useState('');
     const [loading, setLoading] = useState(false);
-    const fetchGitUser = useRef(debounce((searchValue) => { console.log('FETCHING', searchValue); fetchGitUserApi(searchValue); }, 2000)).current;
+    const fetchGitUser = useRef(debounce((searchValue) => {
+        setLoading(true);
+        fetchGitUserApi(searchValue);
+    }, 2000)).current;
 
     useEffect(() => {
         fetchGitUser(username);
-    }, [username]);
+    }, [username, fetchGitUser]);
 
 
     const handleInput = (event) => {
         const { value: searchValue } = event.target;
-        setLoading(true);
         setUserName(searchValue);
     };
 
@@ -26,7 +28,7 @@ const GitHubUser = () => {
             setLoading(false);
             setUserData(null);
             return;
-        };
+        }
         try {
             const response = await axios.get(`${GITHUB_API}${name}`);
             const data = await response.data;

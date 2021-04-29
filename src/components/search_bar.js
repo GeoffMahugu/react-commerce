@@ -9,12 +9,11 @@ const SearchBar = () => {
     let shouldDisplayTxt = searchValue.length > 0;
     return (
         <div>
-            <input type="text" value={searchValue} onChange={handleSearch} />
-            <br />
-            {shouldDisplayTxt && <div>{searchValue}</div>}
-            <br />
+            <div>
+                <label htmlFor="search-product"><b>Search product</b> </label>
+                <input type="text" id="search-product" placeholder="Search product" value={searchValue} onChange={handleSearch} />
+            </div>
             <ProductList />
-
         </div>
     )
 }

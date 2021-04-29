@@ -5,12 +5,10 @@ class Footer extends React.Component {
         super(props);
         this.state = {
             date: new Date().getFullYear()
-        }
+        };
     }
     render() {
-        return (
-            <div>Copyright {this.state.date}</div>
-        )
+        return (<div> © Copyright {this.state.date}</div>)
     }
 }
 

@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 
 const ProductList = () => {
     const [products, setProducts] = useState([]);
-    const [productState, setProductState] = useState(false);
+    const [loading, setLoadingState] = useState(false);
     useEffect(() => {
+        setLoadingState(true);
         setTimeout(() => {
             console.log('COMPONENT LOAD');
 
@@ -13,15 +14,14 @@ const ProductList = () => {
                 { name: "Product 3", id: 3 },
             ]);
             console.log(products);
-            setProductState(products.lenght > 1);
-        }, 1000);
+            setLoadingState(false);
+        }, 5000);
     }, []);
 
     return (
         < div >
             <h4>List of Products</h4>
-            { products.lenght ? <ul>{products.map((product) => { return <li key={product.id}>{product.name}</li> })}</ul> : <div>Loading....</div>}
-            {/* { productState ? <ul>{products.map((product) => { return <li key={product.id}>{product.name}</li> })}</ul> : <div>Loading....</div>} */}
+            {loading ? <div>Loading products....</div> : <>{products && <ul style={{ listStyle: 'none' }}>{products.map((product) => { return <li key={product.id}>{product.name}</li> })}</ul>}</>}
         </div >
     )
 }
