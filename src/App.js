@@ -17,11 +17,8 @@ function App() {
         <div className="container">
           <div className="nav-wrapper">
             <ul style={{ listStyle: 'none' }}>
-              {/* <li>
-                <Link to={`/`}>Home</Link>
-              </li> */}
               <li>
-                <Link to={`/`}>Home</Link>
+                <Link exact to={`/`}>Home</Link>
               </li>
               <li>
                 <Link to={`/counter`}>Counter</Link>
@@ -36,16 +33,16 @@ function App() {
           </div>
           <div className="main-container">
             <Switch>
-              <Route path="" >
+              <Route exact path="/" >
                 <Home />
               </Route>
-              <Route path="/counter" >
+              <Route exact path="/counter" >
                 <CountButton />
               </Route>
-              <Route path="/products">
+              <Route exact path="/products">
                 <SearchBar />
               </Route>
-              <Route path="/users" >
+              <Route exact path="/users" >
                 <GitHubUser />
               </Route>
               <Route path="*" >
