@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { VscHome, VscAdd, VscListUnordered, VscOrganization } from "react-icons/vsc";
 
 import './App.css';
 import Home from './components/home';
@@ -18,16 +19,16 @@ function App() {
           <div className="nav-wrapper">
             <ul style={{ listStyle: 'none' }}>
               <li>
-                <Link exact to={`/`}>Home</Link>
+                <VscHome /><Link exact to={`/`}>Home</Link>
               </li>
               <li>
-                <Link to={`/counter`}>Counter</Link>
+                <VscAdd /> <Link to={`/counter`}>Counter</Link>
               </li>
               <li>
-                <Link to={`/products`}>Products</Link>
+                <VscListUnordered /> <Link to={`/products`}>Products</Link>
               </li>
               <li>
-                <Link to={`/users`}>GitHub User</Link>
+                <VscOrganization /> <Link to={`/users`}>GitHub User</Link>
               </li>
             </ul>
           </div>
