@@ -8,6 +8,8 @@ import SearchBar from './components/search_bar';
 import Footer from './components/footer';
 import GitHubUser from './components/github_user';
 import Page404 from './components/404';
+import UserProfileList from './components/users';
+
 function App() {
   return (
     <Router >
@@ -30,6 +32,9 @@ function App() {
               <li>
                 <VscOrganization /> <Link to={`/users`}>GitHub User</Link>
               </li>
+              <li>
+                <VscOrganization /> <Link to={`/fetch-users`}>API Users</Link>
+              </li>
             </ul>
           </div>
           <div className="main-container">
@@ -45,6 +50,9 @@ function App() {
               </Route>
               <Route exact path="/users" >
                 <GitHubUser />
+              </Route>
+              <Route exact path="/fetch-users" >
+                <UserProfileList />
               </Route>
               <Route path="*" >
                 <Page404 />
